@@ -122,14 +122,14 @@ function Prviewinvoice() {
       formData.append("pdf", pdfBlob, `invoice-${invoiceData.invoiceNumber}.pdf`);
 
 
-      downloadPdf.save(`invoice-${invoiceData.invoiceNumber}.pdf`);
+      // downloadPdf.save(`invoice-${invoiceData.invoiceNumber}.pdf`);
 
 
-      // const result = await axios.post("https://breezy-invoice-api.onrender.com/api/invoice/serviceinvoice", formData)
+      const result = await axios.post("https://cc-invoice-api.onrender.com/api/invoice/serviceinvoice", formData)
       // const result = await axios.post("http://localhost:3018/api/invoice/serviceinvoice", formData)
 
       // console.log(result.data)
-      // alert("invoice sent to whatsapp !! ")
+      alert("invoice sent to whatsapp !! ")
       // window.open(result.data.whatsappLink, "_blank");
       navigate("/invoice")
 
