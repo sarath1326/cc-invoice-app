@@ -131,7 +131,7 @@ function Prviewinvoice() {
       // console.log(result.data)
       // alert("invoice sent to whatsapp !! ")
       // window.open(result.data.whatsappLink, "_blank");
-      // navigate("/home")
+      navigate("/invoice")
 
 
     } catch (error) {
