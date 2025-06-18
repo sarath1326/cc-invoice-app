@@ -404,9 +404,9 @@ const EditableInvoice = () => {
 
     const data = JSON.parse(selectedOption)
     const updatedItems = [...invoiceData.items];
-    updatedItems[index]["description"] = data.opt;
+    updatedItems[index]["description"] = data.particulars;
     updatedItems[index]["price"] = data.price;
-    updatedItems[index]["quantity"] = data.qt;
+    updatedItems[index]["quantity"] = data.quantity;
 
 
     setInvoiceData((prev) => ({
@@ -558,7 +558,7 @@ const EditableInvoice = () => {
                         {
                           description.map((data, index) => (
 
-                            <option value={JSON.stringify(data)}>{data.opt}</option>
+                            <option value={JSON.stringify(data)}>{data.particulars}</option>
 
                           ))
                         }
