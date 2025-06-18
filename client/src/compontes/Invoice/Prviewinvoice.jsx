@@ -8,6 +8,10 @@ import html2canvas from "html2canvas";
 import Navbar from "../Home/Navbar"
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from "react-toastify"
+import { ClipLoader } from "react-spinners"
+
+
 
 
 
@@ -63,6 +67,8 @@ function Prviewinvoice() {
 
   const location = useLocation();
   const navigate = useNavigate()
+  const [loder, setloader] = useState(false)
+
   console.log("props", location.state)
 
   const { invoiceData,
@@ -72,6 +78,7 @@ function Prviewinvoice() {
 
   const downloadPdf = async () => {
     const invoice = document.getElementById("invoice-pdf");
+    setloader(true)
 
     // Temporarily make the PDF section visible
     invoice.style.position = "static";
@@ -144,6 +151,7 @@ function Prviewinvoice() {
       console.error("Error generating PDF:", error);
       navigate("/home")
     } finally {
+      setloader(false)
       // Re-hide the PDF section
       invoice.style.position = "absolute";
       invoice.style.left = "-9999px";
@@ -170,8 +178,17 @@ function Prviewinvoice() {
           onClick={downloadPdf}
           className="w-[150px] mt-[50px] h-[50px] bg-[#1f709f] text-white text-[17px] rounded-md hover:bg-blue-600"
         >
-          Sent Invoice
+          {
+            loder ?
+              <ClipLoader color='white' size={20} />
+              :
+              "Sent Invoice"
+
+
+          }
+
         </button>
+
 
 
       </div>

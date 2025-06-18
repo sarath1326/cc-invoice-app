@@ -15,6 +15,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 route.post("/serviceinvoice",upload.single("pdf"), invoiceControler.generateServiceInvoice)
+route.get("/invoice-items", invoiceControler.getAllInvoiceItems)
+route.post("/invoice-items",invoiceControler.createInvoiceItems)
+route.delete("/invoice-items/:itemId",invoiceControler.deleteInvoiceItem)
+
+
+
 
 
 

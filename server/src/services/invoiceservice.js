@@ -1,7 +1,12 @@
 
+
 import client from "../../server.js"
 import pkg from "whatsapp-web.js"
 const { MessageMedia } = pkg
+import { BillingItems } from "../../DB/model/billingItem.js"
+
+
+
 
 
 
@@ -49,7 +54,58 @@ export const invoiceService = {
                 reject()
             }
         })
+    },
+    getAllInvoiceItems: () => {
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+
+                const result = await BillingItems.find().sort({ createdAt: -1 })
+                resolve(result)
+
+            } catch (error) {
+
+                reject(error)
+            }
+
+        })
+    },
+    createInvoiceItems: (formData) => {
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+
+                const final = new BillingItems(formData)
+                await final.save()
+                resolve()
+
+            } catch (error) {
+                reject(error)
+            }
+        })
+    },
+    deleteInvoiceitem: (itemId) => {
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+
+                await BillingItems.findByIdAndDelete(itemId)
+                resolve()
+
+            } catch (error) {
+                resolve(error)
+            }
+        })
     }
+
+
+
+
+
+
 }
 
 

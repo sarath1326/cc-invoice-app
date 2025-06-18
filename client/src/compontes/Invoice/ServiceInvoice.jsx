@@ -18,6 +18,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import { message } from "antd"
 import { toast } from "react-toastify"
+import { ClipLoader } from "react-spinners"
+
 
 
 
@@ -43,136 +45,164 @@ const EditableInvoice = () => {
     total: 0,
   });
   const navigate = useNavigate()
+  const [loder, setloder] = useState(false)
+
   // const [inputValue, setInputValue] = useState("");
   // const [filteredOptions, setFilteredOptions] = useState([]);
   const [discount, setdiscount] = useState(0)
   // const [tottalAmount, settotalAmount] = useState(0)
 
-  const [description, setdescription] = useState([
+  // const [description, setdescription] = useState([
 
-    {
-      opt: "Ac service",
-      price: 600,
-      qt: 1
-    },
-    {
-      opt: "Ac water service",
-      price: 1200,
-      qt: 1
-    },
-    {
-      opt: "Ac installation",
-      price: 1200,
-      qt: 1
-    },
-    {
-      opt: "Ac capasitor change",
-      price: 900,
-      qt: 1
-    },
-    {
-      opt: "Ac pcb service",
-      price: 0,
-      qt: 1
-    },
-    {
-      opt: "Gas Charging",
-      price: 0,
-      qt: 1
-    },
-    {
-      opt: "W/M motor change",
-      price: 0,
-      qt: 1
-    },
-    {
-      opt: "W/M capasitor change",
-      price: 0,
-      qt: 1
-    },
-    {
-      opt: "W/M service",
-      price: 500,
-      qt: 1
-    },
-    {
-      opt: "W/M  pcb service",
-      price: 500,
-      qt: 1
-    },
-    {
-      opt: "TV service",
-      price: 700,
-      qt: 1
-    },
-    {
-      opt: "Refrigerator Compressor change",
-      price: 700,
-      qt: 1
-    },
-    {
-      opt: "Compressor",
-      price: 4500,
-      qt: 1
-    },
-    {
-      opt: "Filter",
-      price: 350,
-      qt: 1
-    },
-    {
-      opt: "Transporting",
-      price: 150,
-      qt: 1
-    },
-    {
-      opt: "Label Charge",
-      price: 1200,
-      qt: 1
-    },
-    {
-      opt: "Gas",
-      price: 1800,
-      qt: 1
-    },
+  //   {
+  //     opt: "Ac service",
+  //     price: 600,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "Ac water service",
+  //     price: 1200,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "Ac installation",
+  //     price: 1200,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "Ac capasitor change",
+  //     price: 900,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "Ac pcb service",
+  //     price: 0,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "Gas Charging",
+  //     price: 0,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "W/M motor change",
+  //     price: 0,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "W/M capasitor change",
+  //     price: 0,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "W/M service",
+  //     price: 500,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "W/M  pcb service",
+  //     price: 500,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "TV service",
+  //     price: 700,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "Refrigerator Compressor change",
+  //     price: 700,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "Compressor",
+  //     price: 4500,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "Filter",
+  //     price: 350,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "Transporting",
+  //     price: 150,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "Label Charge",
+  //     price: 1200,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "Gas",
+  //     price: 1800,
+  //     qt: 1
+  //   },
 
-    {
-      opt: "Fanmotor changed",
-      price: 1200,
-      qt: 1
-    },
-    {
-      opt: "Freezer",
-      price: 2000,
-      qt: 1
-    },
-    {
-      opt: "TV backlight change",
-      price: 0,
-      qt: 1
-    },
-    {
-      opt: "TV panal service",
-      price: 0,
-      qt: 1
-    },
+  //   {
+  //     opt: "Fanmotor changed",
+  //     price: 1200,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "Freezer",
+  //     price: 2000,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "TV backlight change",
+  //     price: 0,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "TV panal service",
+  //     price: 0,
+  //     qt: 1
+  //   },
 
-    {
-      opt: "Ac refitting",
-      price: 1800,
-      qt: 1
-    },
-    {
-      opt: "Other Expense",
-      price: 0,
-      qt: 1
+  //   {
+  //     opt: "Ac refitting",
+  //     price: 1800,
+  //     qt: 1
+  //   },
+  //   {
+  //     opt: "Other Expense",
+  //     price: 0,
+  //     qt: 1
+  //   }
+
+
+
+
+
+  // ])
+
+  const [description, setdescription] = useState([])
+
+  const getParticulars = async () => {
+
+    try {
+
+      const result = (await axios("https://cc-invoice-api.onrender.com/api/invoice/invoice-items")).data
+      console.log("resut", result)
+      setdescription(() => result?.data)
+
+    } catch (error) {
+
+      console.log("error", error)
+      toast.error("network error")
     }
+  }
+
+  useEffect(() => {
+
+    getParticulars()
+
+  }, [])
 
 
 
-
-
-  ])
 
 
 
@@ -295,6 +325,7 @@ const EditableInvoice = () => {
 
   const downloadPdf = async () => {
     const invoice = document.getElementById("invoice-pdf");
+    setloder(true)
 
     // Temporarily make the PDF section visible
     invoice.style.position = "static";
@@ -357,10 +388,12 @@ const EditableInvoice = () => {
       navigate("/invoice")
 
     } finally {
+      setloder(false)
       // Re-hide the PDF section
       invoice.style.position = "absolute";
       invoice.style.left = "-9999px";
       invoice.style.opacity = "0";
+
     }
   };
 
@@ -607,10 +640,19 @@ const EditableInvoice = () => {
 
             <button
               onClick={downloadPdf}
+
               className=" block sm:hidden w-[100px] mb-10 mr-5 h-[30px] bg-blue-500 text-white rounded-md hover:bg-blue-600"
             >
-              Sent Invoice
+              {
+                loder ?
+                  <ClipLoader size={20} />
+                  : "Sent Invoice"
+
+              }
+
             </button>
+
+
 
 
 
