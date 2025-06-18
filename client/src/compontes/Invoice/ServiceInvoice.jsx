@@ -370,7 +370,8 @@ const EditableInvoice = () => {
       // const result = await axios.post("http://localhost:3018/api/invoice/serviceinvoice", formData)
 
       // console.log(result.data)
-      alert("invoice sent to whatsapp !! ")
+      // alert("invoice sent to whatsapp !! ")
+      toast.success("invoice sent to whatsapp !!")
 
       // window.open(result.data.whatsappLink, "_blank");
       navigate("/invoice")
@@ -379,7 +380,8 @@ const EditableInvoice = () => {
     } catch (error) {
 
       // toast.error("invoice whatsapp sent failed !!")
-      alert("invoice sent to whatsapp failed please download !! ")
+      // alert("invoice sent to whatsapp failed please download !! ")
+      toast.warning("invoice sent to whatsapp failed please download !! ")
       downloadPdf.save(`invoice-${invoiceData.invoiceNumber}.pdf`);
 
       console.log("err")

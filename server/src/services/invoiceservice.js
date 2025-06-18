@@ -37,7 +37,7 @@ export const invoiceService = {
                 const media = await MessageMedia.fromUrl(fileUrl, { unsafeMime: true });
 
 
-                const message = "*Cool&Clean Solution ❄️*\nThis is your service invoice! Please check.";
+                const message = "*Cool&Clean ❄️*\nThis is your service invoice! Please check.";
 
                 await client.sendMessage(chatId, message);
                 await client.sendMessage(chatId, media);
