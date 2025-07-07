@@ -132,8 +132,8 @@ function Prviewinvoice() {
       // downloadPdf.save(`invoice-${invoiceData.invoiceNumber}.pdf`);
 
 
-      // const result = await axios.post("https://cc-invoice-api.onrender.com/api/invoice/serviceinvoice", formData)
-      const result = await axios.post("http://localhost:3018/api/invoice/serviceinvoice", formData)
+      const result = await axios.post("https://cc-invoice-api.onrender.com/api/invoice/serviceinvoice", formData)
+      // const result = await axios.post("http://localhost:3018/api/invoice/serviceinvoice", formData)
 
       // console.log(result.data)
       // alert("invoice sent to whatsapp !! ")
